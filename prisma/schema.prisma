@@ -1,0 +1,53 @@
+// prisma/schema.prisma
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  resumes   Resume[]
+}
+
+model Resume {
+  id          String   @id @default(cuid())
+  userId      String
+  fileName    String
+  fileSize    Int
+  fileType    String
+  extractedText String
+  createdAt   DateTime @default(now())
+
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  analyses    AnalysisResult[]
+}
+
+model AnalysisResult {
+  id            String   @id @default(cuid())
+  resumeId      String
+  atsScore      Int
+  grammarScore  Int
+  keywordScore  Int
+  overallScore  Int
+  missingSkills String   // JSON array stored as string
+  presentSkills String   // JSON array stored as string
+  suggestions   String   // JSON array stored as string
+  wordCount     Int
+  sectionCount  Int
+  jobDescription String?
+  matchScore    Int?
+  missingKeywords String? // JSON array
+  createdAt     DateTime @default(now())
+
+  resume        Resume   @relation(fields: [resumeId], references: [id], onDelete: Cascade)
+}

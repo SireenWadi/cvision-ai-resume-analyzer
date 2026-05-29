@@ -1,0 +1,426 @@
+/* app/globals.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&family=Unbounded:wght@400;700;900&display=swap');
+
+/* ─────────────────────────────────────────────────────────────────
+   BACKGROUND IMAGE ASSET MAP
+   ─────────────────────────────────────────────────────────────────
+   Place these files in your /public/assets/bg/ folder:
+
+   bg-body-space.jpg        — Deep space/galaxy subtle dark texture
+                              (overall site ambient background)
+   bg-hero-grid.jpg         — High-tech cyan circuit/network grid
+                              (hero section)
+   bg-auth-glass.jpg        — Dark abstract fractured glass or holographic texture
+                              (login & register cards backdrop)
+   bg-features-mesh.jpg     — Dark gradient mesh / geometric abstract
+                              (features & stats sections)
+   bg-dashboard-cyber.jpg   — Dark cybernetic HUD / data-grid mesh
+                              (dashboard & results pages)
+   bg-upload-circuit.jpg    — Dark PCB circuit board or wireframe abstract
+                              (upload page)
+   bg-cta-pulse.jpg         — Dark radial energy / neon pulse abstract
+                              (CTA & pricing sections)
+   bg-testimonials-dark.jpg — Dark frosted bokeh / abstract dark blur
+                              (testimonials section)
+
+   All images should be:
+   • Dark-dominant (no bright/white images)
+   • Abstract/tech/ambient — no stock photos of people
+   • High resolution: min 1920×1080
+   • Blended via overlay, multiply, or low opacity layers
+   ───────────────────────────────────────────────────────────────── */
+
+:root {
+  --electric: #4DFFC3;
+  --electric-dim: rgba(77,255,195,0.15);
+  --electric-glow: rgba(77,255,195,0.4);
+  --violet: #A855F7;
+  --violet-dim: rgba(168,85,247,0.15);
+  --blue: #3B82F6;
+  --blue-dim: rgba(59,130,246,0.15);
+  --rose: #FB7185;
+  --amber: #FCD34D;
+  --bg: #060812;
+  --surface: #0D1120;
+  --surface2: #141828;
+  --surface3: #1C2235;
+  --surface4: #232A42;
+  --glass: rgba(6,8,18,0.82);
+  --glass-light: rgba(255,255,255,0.04);
+  --glass-border: rgba(255,255,255,0.08);
+  --glass-border-bright: rgba(77,255,195,0.25);
+  --text-primary: #F0F4FF;
+  --text-secondary: #8892B0;
+  --text-muted: #4A5278;
+  --text-accent: var(--electric);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.4);
+  --shadow-md: 0 4px 20px rgba(0,0,0,0.5);
+  --shadow-lg: 0 8px 40px rgba(0,0,0,0.6);
+  --shadow-electric: 0 0 30px rgba(77,255,195,0.15), 0 4px 20px rgba(0,0,0,0.5);
+  /* Legacy compat */
+  --accent: #4DFFC3;
+  --accent-hover: #2DEBA3;
+  --success: #4DFFC3;
+  --warning: #FCD34D;
+  --danger: #FB7185;
+  --border: rgba(255,255,255,0.08);
+  --blue-50: rgba(59,130,246,0.08);
+  --blue-100: rgba(59,130,246,0.15);
+  --blue-200: rgba(59,130,246,0.25);
+  --blue-400: #3B82F6;
+  --blue-500: #2563EB;
+  --blue-600: #1D4ED8;
+  --indigo-400: #818CF8;
+  --indigo-500: #6366F1;
+  --slate-900: #060812;
+  --r-sm: 8px; --r-md: 12px; --r-lg: 16px; --r-xl: 24px; --r-full: 9999px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+/* ─────────────────────────────────────────────────────────────────
+   BODY — Global ambient space background
+   Asset: bg-body-space.jpg
+   Dark deep-space / galaxy abstract texture.
+   Blended with a near-black overlay via background-blend-mode: overlay
+   so the base color #060812 dominates and the texture is whisper-subtle.
+   ───────────────────────────────────────────────────────────────── */
+body {
+  font-family: 'Outfit', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text-primary);
+  overflow-x: hidden;
+  margin: 0; padding: 0;
+
+  /* bg-body-space.jpg — deep space/nebula dark texture, blended multiply */
+  background-color: #060812;
+  background-image: url('/assets/bg/bg-body-space.jpg');
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-attachment: fixed;   /* parallax-lite: image stays as you scroll */
+  background-blend-mode: multiply; /* darkens the image into the base color */
+}
+
+h1,h2,h3,h4,h5,h6 { font-family: 'Outfit', sans-serif; font-weight: 700; }
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--surface4); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(77,255,195,0.3); }
+
+/* ─── Animations ─────────────────────────────────────────────────── */
+@keyframes float { 0%,100%{transform:translateY(0) rotate(0deg)} 33%{transform:translateY(-18px) rotate(1deg)} 66%{transform:translateY(-8px) rotate(-1deg)} }
+@keyframes fadeUp { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
+@keyframes fadeIn { from{opacity:0} to{opacity:1} }
+@keyframes spin { to{transform:rotate(360deg)} }
+@keyframes pulse-glow { 0%,100%{box-shadow:0 0 0 0 rgba(77,255,195,0)} 50%{box-shadow:0 0 20px 6px rgba(77,255,195,0.25)} }
+@keyframes shimmer { 0%{background-position:-200% center} 100%{background-position:200% center} }
+@keyframes scanline { 0%{top:-2px} 100%{top:100%} }
+@keyframes orbPulse { 0%,100%{transform:scale(1);opacity:.6} 50%{transform:scale(1.15);opacity:.9} }
+@keyframes borderGlow {
+  0%,100% { border-color: rgba(77,255,195,0.2); box-shadow: 0 0 10px rgba(77,255,195,0.05); }
+  50% { border-color: rgba(77,255,195,0.5); box-shadow: 0 0 25px rgba(77,255,195,0.15); }
+}
+@keyframes gridShift {
+  0%   { background-position: 0 0; }
+  100% { background-position: 50px 50px; }
+}
+
+.animate-float           { animation: float 9s ease-in-out infinite; }
+.animate-float-delayed   { animation: float 9s ease-in-out infinite; animation-delay: -4s; }
+.animate-float-slow      { animation: float 14s ease-in-out infinite; animation-delay: -7s; }
+.animate-fade-up         { animation: fadeUp 0.6s cubic-bezier(.22,.61,.36,1) forwards; }
+.animate-fade-in         { animation: fadeIn 0.5s ease forwards; }
+.animate-spin            { animation: spin 1s linear infinite; }
+.animate-pulse-glow      { animation: pulse-glow 2.5s ease-in-out infinite; }
+.animate-shimmer         { animation: shimmer 3s linear infinite; }
+.animate-orb-pulse       { animation: orbPulse 4s ease-in-out infinite; }
+.animate-border-glow     { animation: borderGlow 3s ease-in-out infinite; }
+
+.delay-1 { animation-delay: 0.08s; opacity: 0; }
+.delay-2 { animation-delay: 0.18s; opacity: 0; }
+.delay-3 { animation-delay: 0.28s; opacity: 0; }
+.delay-4 { animation-delay: 0.38s; opacity: 0; }
+.delay-5 { animation-delay: 0.48s; opacity: 0; }
+
+/* ─── Glassmorphism utilities ─────────────────────────────────────── */
+.glass {
+  background: var(--glass);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+}
+.glass-card {
+  background: var(--glass-light);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+}
+
+/* ─── Gradient text ───────────────────────────────────────────────── */
+.gradient-text-electric {
+  background: linear-gradient(135deg,#4DFFC3 0%,#3B82F6 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.gradient-text-violet {
+  background: linear-gradient(135deg,#A855F7 0%,#4DFFC3 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+
+/* ─── Input ───────────────────────────────────────────────────────── */
+.cv-input {
+  width: 100%; padding: 13px 18px; border-radius: 12px;
+  border: 1px solid var(--glass-border);
+  background: rgba(6,8,18,0.6);
+  color: var(--text-primary);
+  font-family: 'Outfit',sans-serif; font-size: 15px;
+  outline: none; transition: border-color .2s, box-shadow .2s;
+}
+.cv-input:focus { border-color: rgba(77,255,195,.4); box-shadow: 0 0 0 3px rgba(77,255,195,.08); }
+.cv-input::placeholder { color: var(--text-muted); }
+
+/* ─── Chips ───────────────────────────────────────────────────────── */
+.chip { padding: 4px 10px; border-radius: 9999px; font-size: 11px; font-weight: 600; }
+.chip-success { background: rgba(77,255,195,.1); color: #4DFFC3; border: 1px solid rgba(77,255,195,.25); }
+.chip-warning { background: rgba(252,211,77,.1); color: #FCD34D; border: 1px solid rgba(252,211,77,.25); }
+.chip-blue    { background: rgba(59,130,246,.1); color: #60A5FA; border: 1px solid rgba(59,130,246,.25); }
+.chip-danger  { background: rgba(251,113,133,.1); color: #FB7185; border: 1px solid rgba(251,113,133,.25); }
+.chip-present { background: rgba(77,255,195,.08); color: #4DFFC3; border: 1px solid rgba(77,255,195,.2); }
+
+/* ─── Toggle ──────────────────────────────────────────────────────── */
+.toggle-track { width:44px;height:24px;border-radius:12px;background:var(--surface4);position:relative;cursor:pointer;transition:background .2s; }
+.toggle-track.on { background: linear-gradient(90deg,#4DFFC3,#3B82F6); }
+.toggle-thumb { position:absolute;width:18px;height:18px;border-radius:50%;background:white;top:3px;left:3px;transition:transform .2s;box-shadow:0 1px 4px rgba(0,0,0,.4); }
+.toggle-track.on .toggle-thumb { transform: translateX(20px); }
+
+/* ─── Nav / Sidebar active ────────────────────────────────────────── */
+.sidebar-item-active { background:rgba(77,255,195,.08) !important; color:#4DFFC3 !important; border:1px solid rgba(77,255,195,.15) !important; }
+
+/* ─── Drop zone ───────────────────────────────────────────────────── */
+.drop-zone-active { border-color:rgba(77,255,195,.6) !important; background:rgba(77,255,195,.04) !important; transform:scale(1.01); box-shadow:0 0 40px rgba(77,255,195,.12) !important; }
+
+/* ─── Buttons ─────────────────────────────────────────────────────── */
+.btn-electric {
+  position:relative; overflow:hidden;
+  background: linear-gradient(135deg,rgba(77,255,195,.12) 0%,rgba(59,130,246,.12) 100%);
+  border: 1px solid rgba(77,255,195,.3);
+  color: #4DFFC3; font-family: 'Outfit',sans-serif; font-weight:600;
+  cursor:pointer; transition:all .25s;
+}
+.btn-electric::before { content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(77,255,195,.1),transparent);transition:left .5s; }
+.btn-electric:hover::before { left:150%; }
+.btn-electric:hover { background:linear-gradient(135deg,rgba(77,255,195,.18) 0%,rgba(59,130,246,.18) 100%); box-shadow:0 0 20px rgba(77,255,195,.2); }
+
+.btn-solid { background:linear-gradient(135deg,#4DFFC3 0%,#3B82F6 100%);border:none;color:#060812;font-family:'Outfit',sans-serif;font-weight:700;cursor:pointer;transition:all .25s; }
+.btn-solid:hover { box-shadow:0 0 30px rgba(77,255,195,.4); transform:translateY(-1px); }
+
+/* ─── Grid background utility ─────────────────────────────────────── */
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(77,255,195,.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(77,255,195,.025) 1px,transparent 1px);
+  background-size: 50px 50px;
+}
+/* Animated grid variant */
+.grid-bg-animated {
+  background-image:
+    linear-gradient(rgba(77,255,195,.04) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(77,255,195,.04) 1px,transparent 1px);
+  background-size: 50px 50px;
+  animation: gridShift 8s linear infinite;
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   SECTION BACKGROUND CLASSES
+   Apply these to your section wrappers in component files.
+   Each class layers the bg image UNDER a dark color overlay,
+   keeping all text fully readable.
+   ───────────────────────────────────────────────────────────────── */
+
+/* ── Hero section background
+   Asset: bg-hero-grid.jpg
+   High-tech abstract circuit/network grid image.
+   Overlaid with a very dark color so the grid peeks through subtly.
+   ─── */
+.bg-hero {
+  /* bg-hero-grid.jpg — abstract cyan circuit/network grid, dark-dominant */
+  background-color: #060812;
+  background-image:
+    /* Dark top gradient overlay for text legibility */
+    linear-gradient(
+      160deg,
+      rgba(6,8,18,0.92) 0%,
+      rgba(6,8,18,0.80) 40%,
+      rgba(6,8,18,0.88) 100%
+    ),
+    url('/assets/bg/bg-hero-grid.jpg');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-blend-mode: normal; /* overlay handles blending via the gradient */
+}
+
+/* ── Auth cards backdrop (Login / Register page wrapper)
+   Asset: bg-auth-glass.jpg
+   Dark holographic fractured glass or abstract dark crystal texture.
+   Card itself is frosted glass on top of this.
+   ─── */
+.bg-auth {
+  /* bg-auth-glass.jpg — dark abstract holographic/fractured glass texture */
+  background-color: #060812;
+  background-image:
+    linear-gradient(
+      135deg,
+      rgba(6,8,18,0.94) 0%,
+      rgba(13,17,32,0.88) 50%,
+      rgba(6,8,18,0.94) 100%
+    ),
+    url('/assets/bg/bg-auth-glass.jpg');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-blend-mode: normal;
+}
+
+/* ── Features / Stats sections
+   Asset: bg-features-mesh.jpg
+   Dark gradient mesh / geometric abstract pattern.
+   Very low visibility — just adds surface texture.
+   ─── */
+.bg-features {
+  /* bg-features-mesh.jpg — dark geometric gradient mesh, barely visible */
+  background-color: #0D1120;
+  background-image:
+    linear-gradient(
+      180deg,
+      rgba(13,17,32,0.96) 0%,
+      rgba(13,17,32,0.90) 50%,
+      rgba(13,17,32,0.96) 100%
+    ),
+    url('/assets/bg/bg-features-mesh.jpg');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-blend-mode: normal;
+}
+
+/* ── Dashboard & Results pages
+   Asset: bg-dashboard-cyber.jpg
+   Dark cybernetic HUD / data-mesh / wireframe abstract.
+   Applied as the main content area background.
+   ─── */
+.bg-dashboard {
+  /* bg-dashboard-cyber.jpg — cybernetic HUD/data-grid abstract dark image */
+  background-color: #060812;
+  background-image:
+    linear-gradient(
+      180deg,
+      rgba(6,8,18,0.95) 0%,
+      rgba(6,8,18,0.88) 100%
+    ),
+    url('/assets/bg/bg-dashboard-cyber.jpg');
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-blend-mode: normal;
+}
+
+/* ── Upload page
+   Asset: bg-upload-circuit.jpg
+   Dark PCB / circuit board or wireframe abstract.
+   ─── */
+.bg-upload {
+  /* bg-upload-circuit.jpg — dark circuit board / PCB wireframe abstract */
+  background-color: #060812;
+  background-image:
+    linear-gradient(
+      180deg,
+      rgba(6,8,18,0.95) 0%,
+      rgba(6,8,18,0.88) 100%
+    ),
+    url('/assets/bg/bg-upload-circuit.jpg');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-blend-mode: normal;
+}
+
+/* ── CTA & Pricing sections
+   Asset: bg-cta-pulse.jpg
+   Dark radial energy burst / neon pulse abstract.
+   ─── */
+.bg-cta {
+  /* bg-cta-pulse.jpg — dark radial neon pulse/energy burst abstract */
+  background-color: #060812;
+  background-image:
+    linear-gradient(
+      180deg,
+      rgba(6,8,18,0.93) 0%,
+      rgba(6,8,18,0.85) 50%,
+      rgba(6,8,18,0.93) 100%
+    ),
+    url('/assets/bg/bg-cta-pulse.jpg');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-blend-mode: normal;
+}
+
+/* ── Testimonials section
+   Asset: bg-testimonials-dark.jpg
+   Dark frosted bokeh / abstract dark blur / deep space variant.
+   ─── */
+.bg-testimonials {
+  /* bg-testimonials-dark.jpg — dark bokeh/blur abstract ambient */
+  background-color: #060812;
+  background-image:
+    linear-gradient(
+      180deg,
+      rgba(6,8,18,0.96) 0%,
+      rgba(6,8,18,0.90) 50%,
+      rgba(6,8,18,0.96) 100%
+    ),
+    url('/assets/bg/bg-testimonials-dark.jpg');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-blend-mode: normal;
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   SIDEBAR background
+   Asset: bg-dashboard-cyber.jpg (reused — same file, different crop)
+   Applied to the left sidebar panel.
+   ───────────────────────────────────────────────────────────────── */
+.bg-sidebar {
+  /* bg-dashboard-cyber.jpg — reused, very dark overlay for sidebar */
+  background-color: rgba(6,8,18,0.98);
+  background-image:
+    linear-gradient(
+      180deg,
+      rgba(6,8,18,0.97) 0%,
+      rgba(13,17,32,0.96) 100%
+    ),
+    url('/assets/bg/bg-dashboard-cyber.jpg');
+  background-size: cover;
+  background-position: left center;
+  background-repeat: no-repeat;
+  background-blend-mode: normal;
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   SCANLINE overlay (decorative — no image needed)
+   ───────────────────────────────────────────────────────────────── */
+.scanline-container { position:relative; overflow:hidden; }
+.scanline-container::after {
+  content:'';position:absolute;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,rgba(77,255,195,.4),transparent);
+  animation:scanline 3s linear infinite;pointer-events:none;
+}
+@keyframes scanline { 0%{top:-2px} 100%{top:100%} }
